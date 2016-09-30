@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CoreWebApplication.Models;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreWebApplication.Controllers
