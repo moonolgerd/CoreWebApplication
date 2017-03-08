@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CoreWebApplication.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using CoreWebApplication.Data;
 
 namespace CoreWebApplication
 {
@@ -26,17 +29,23 @@ namespace CoreWebApplication
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=HeroicQuest;Trusted_Connection=True;";
 
+            services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
+            services.AddSingleton<IHeroRepository, HeroRepository>();
+            services.AddSingleton<IVillainRepository, VillainRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            HeroicContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             app.UseMvc();
+            DbInitializer.Initialize(context);
         }
     }
 }

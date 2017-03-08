@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CoreWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,55 +7,49 @@ namespace CoreWebApplication.Controllers
     [Route("api/[controller]")]
     public class VillainsController : Controller
     {
-        private static int _counter;
-        private static readonly Dictionary<int, Villain> _villains;
+        private IVillainRepository _villains;
 
-        static VillainsController()
+        public VillainsController(IVillainRepository villains)
         {
-            _villains = new Dictionary<int, Villain> {
-                [11] = new Villain(11) { Name = "Diablo", Level = 100 },
-                [12] = new Villain(12) { Name = "Shodan", Level = 256 },
-                [13] = new Villain(13) { Name = "Joker", Level = 50 },
-                [666] = new Villain(666) { Name = "Wild Hunt", Level = 99999 }
-            };
+            _villains = villains;
         }
-
+               
         [HttpGet]
         public IEnumerable<Villain> Get()
         {
-            return _villains.Values;
+            return _villains.GetAll();
         }
 
         [HttpGet("{id}")]
         public Villain Get(int id)
         {
-            return _villains[id];
+            return _villains.Find(id);
         }
 
-        // POST api/heroes
         [HttpPost]
         public void Post([FromBody]Villain villain)
         {
-            _villains.Add(++_counter, villain);
+            if (_villains.Find(villain.Id) == null)
+                _villains.Add(villain);
         }
 
-        // PUT api/heroes/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Villain villain)
         {
-            if (_villains.ContainsKey(id))
+            var existing = _villains.Find(villain.Id);
+            if (existing != null)
             {
-                _villains[id].Name = villain.Name;
-                _villains[id].Level = villain.Level;
-                _villains[id].Role = villain.Role;
+                existing.Name = villain.Name;
+                existing.Level = villain.Level;
+                existing.Role = villain.Role;
+                _villains.Update(existing);
             }
         }
 
-        // DELETE api/heroes/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            if (_villains.ContainsKey(id))
+            if (_villains.Find(id) != null)
                 _villains.Remove(id);
         }
     }

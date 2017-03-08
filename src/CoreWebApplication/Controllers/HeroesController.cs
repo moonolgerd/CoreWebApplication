@@ -8,49 +8,45 @@ namespace CoreWebApplication.Controllers
     [Route("api/[controller]")]
     public class HeroesController : Controller
     {
-        #region Fields
+        private IHeroRepository _heroes;
 
-        private static readonly Random _random = new Random();
-        private static readonly Dictionary<int, Hero> _heroes = new Dictionary<int, Hero>();
-
-        #endregion
-
-        static HeroesController()
+        public HeroesController(IHeroRepository heroes)
         {
-            for (var i = 1; i <= 15; i++)
-                _heroes.Add(i, new Hero(i) { Name = $"Hero{i}", Age = _random.Next(15, 90) });
-        }
+            _heroes = heroes;
+        }    
 
         // GET api/heroes
         [HttpGet]
         public IEnumerable<Hero> Get()
         {
-            return _heroes.Values;
+            return _heroes.GetAll();
         }
 
         // GET api/heroes/5
         [HttpGet("{id}")]
         public Hero Get(int id)
         {
-            return _heroes[id];
+            return _heroes.Find(id);
         }
 
         // POST api/heroes
         [HttpPost]
         public void Post([FromBody]Hero hero)
         {
-            if (!_heroes.ContainsKey(hero.Id))
-                _heroes.Add(hero.Id, hero);
+            if (_heroes.Find(hero.Id) == null)
+                _heroes.Add(hero);
         }
 
         // PUT api/heroes/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Hero hero)
         {
-            if (_heroes.ContainsKey(id))
+            var existing = _heroes.Find(hero.Id);
+            if (existing != null)
             {
-                _heroes[id].Name = hero.Name;
-                _heroes[id].Age = hero.Age;
+                existing.Name = hero.Name;
+                existing.Age = hero.Age;
+                _heroes.Update(existing);
             }
         }
 
@@ -58,7 +54,7 @@ namespace CoreWebApplication.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            if (_heroes.ContainsKey(id))
+            if (_heroes.Find(id) != null)
                 _heroes.Remove(id);
         }
     }
