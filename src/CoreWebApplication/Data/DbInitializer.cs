@@ -1,4 +1,5 @@
 ﻿using CoreWebApplication.Models;
+using Heroic.Shared;
 using System.Linq;
 
 namespace CoreWebApplication.Data

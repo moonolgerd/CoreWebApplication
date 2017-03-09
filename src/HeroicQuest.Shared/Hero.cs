@@ -1,4 +1,4 @@
-namespace CoreWebApplication.Models
+namespace Heroic.Shared
 {
     public class Hero
     {

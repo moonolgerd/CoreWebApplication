@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CoreWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Heroic.Shared;
 
 namespace CoreWebApplication.Controllers
 {

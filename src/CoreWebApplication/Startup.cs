@@ -31,7 +31,7 @@ namespace CoreWebApplication
             services.AddApplicationInsightsTelemetry(Configuration);
             var connection = @"Server=(localdb)\mssqllocaldb;Database=HeroicQuest;Trusted_Connection=True;";
 
-            services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection), ServiceLifetime.Transient);
             services.AddMvc();
             services.AddSingleton<IHeroRepository, HeroRepository>();
             services.AddSingleton<IVillainRepository, VillainRepository>();

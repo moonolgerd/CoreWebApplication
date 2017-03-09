@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Heroic.Shared;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CoreWebApplication.Models
