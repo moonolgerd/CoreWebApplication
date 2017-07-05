@@ -90,6 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="Connected Services\Remora-azureMobileApp\ConnectedService.json" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,9 @@
       <Project>{8520e7f4-aa6c-49f7-a3fc-9f1af9b1eb5d}</Project>
       <Name>Heroic.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
