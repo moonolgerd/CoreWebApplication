@@ -9,8 +9,15 @@ namespace App3
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : PrismUnityApplication
-    {
-        public App()
+	{
+
+		// This MobileServiceClient has been configured to communicate with the Azure Mobile Service and
+		// Azure Gateway using the application url. You're all set to start working with your Mobile Service!
+		public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient Remora_azureClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
+		"http://remora-azure.azurewebsites.net");
+
+
+		public App()
         {
             InitializeComponent();
         }

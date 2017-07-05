@@ -23,6 +23,8 @@ namespace App3.ViewModels
 
         private async Task GetDataAsync()
         {
+			var foo = await App.Remora_azureClient.GetTable<Hero>().ToListAsync();
+
             var client = new HttpClient();
             var data = await client.GetAsync(new Uri("http://localhost:5000/api/heroes"));
 
