@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreWebApplication", "src\CoreWebApplication\CoreWebApplication.csproj", "{761CCB69-640D-4F9C-8CDD-B385B54B3F97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Heroic.Shared", "src\HeroicQuest.Shared\Heroic.Shared.csproj", "{8520E7F4-AA6C-49F7-A3FC-9F1AF9B1EB5D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heroic.App", "src\HeroicQuest.App\Heroic.App.csproj", "{35D4A77C-3628-427B-BEEF-20FB3122B2CF}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,22 @@ Global
 		{35D4A77C-3628-427B-BEEF-20FB3122B2CF}.Release|x86.ActiveCfg = Release|x86
 		{35D4A77C-3628-427B-BEEF-20FB3122B2CF}.Release|x86.Build.0 = Release|x86
 		{35D4A77C-3628-427B-BEEF-20FB3122B2CF}.Release|x86.Deploy.0 = Release|x86
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Debug|x86.Build.0 = Debug|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|ARM.Build.0 = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|x64.Build.0 = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{C718A506-FAFA-4130-9C04-8ECAA7DDE6DB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

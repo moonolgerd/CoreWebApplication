@@ -4,11 +4,8 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/6d0ebd06-bc6d-485f-9929-65dffa7ffcbb/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/CoreWebApplication</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/6d0ebd06-bc6d-485f-9929-65dffa7ffcbb/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/CoreWebApplication</ApplicationInsightsAnnotationResourceId>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
