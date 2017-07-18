@@ -8,7 +8,7 @@ namespace CoreWebApplication.Controllers
     [Route("api/[controller]")]
     public class VillainsController : Controller
     {
-        private IVillainRepository _villains;
+        private readonly IVillainRepository _villains;
 
         public VillainsController(IVillainRepository villains)
         {
