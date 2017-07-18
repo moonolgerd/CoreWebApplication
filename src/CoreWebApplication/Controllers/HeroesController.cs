@@ -9,7 +9,7 @@ namespace CoreWebApplication.Controllers
     [Route("api/[controller]")]
     public class HeroesController : Controller
     {
-        private IHeroRepository _heroes;
+        private readonly IHeroRepository _heroes;
 
         public HeroesController(IHeroRepository heroes)
         {

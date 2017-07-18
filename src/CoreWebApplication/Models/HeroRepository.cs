@@ -6,12 +6,9 @@ namespace CoreWebApplication.Models
 {
     public class HeroRepository : IHeroRepository
     {
-        private HeroicContext _context;
+        private readonly HeroicContext _context;
 
-        public HeroRepository(HeroicContext context)
-        {
-            _context = context;
-        }
+        public HeroRepository(HeroicContext context) => _context = context;
 
         public void Add(Hero item)
         {
@@ -19,15 +16,9 @@ namespace CoreWebApplication.Models
             _context.SaveChanges();
         }
 
-        public Hero Find(int id)
-        {
-            return _context.Heroes.FirstOrDefault(p => p.Id == id);
-        }
+        public Hero Find(int id) => _context.Heroes.FirstOrDefault(p => p.Id == id);
 
-        public IEnumerable<Hero> GetAll()
-        {
-            return _context.Heroes.ToList();
-        }
+        public IEnumerable<Hero> GetAll() => _context.Heroes.ToList();
 
         public void Remove(int id)
         {
