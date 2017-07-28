@@ -29,7 +29,8 @@ namespace CoreWebApplication
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-            var connection = @"Data Source=remora-server.database.windows.net;Initial Catalog=HeroicQuest;Integrated Security=False;User ID=omerkulov;Password=Remora2017;Connect Timeout=15;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //var connection = @"Data Source=remora-server.database.windows.net;Initial Catalog=HeroicQuest;Integrated Security=False;User ID=omerkulov;Password=Remora2017;Connect Timeout=15;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=HeroicQuest;Trusted_Connection=True;";
 
             services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection), ServiceLifetime.Transient);
             services.AddMvc();

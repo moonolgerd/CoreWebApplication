@@ -47,6 +47,7 @@ namespace CoreWebApplication.Controllers
             {
                 existing.Name = hero.Name;
                 existing.Age = hero.Age;
+                existing.Gender = hero.Gender;
                 _heroes.Update(existing);
             }
         }

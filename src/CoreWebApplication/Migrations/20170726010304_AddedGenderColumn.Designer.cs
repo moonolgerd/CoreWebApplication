@@ -8,9 +8,10 @@ using CoreWebApplication.Models;
 namespace CoreWebApplication.Migrations
 {
     [DbContext(typeof(HeroicContext))]
-    partial class HeroicContextModelSnapshot : ModelSnapshot
+    [Migration("20170726010304_AddedGenderColumn")]
+    partial class AddedGenderColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
