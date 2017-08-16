@@ -12,10 +12,7 @@ namespace App3.ViewModels
 {
     public class MainPageViewModel
     {
-        public MainPageViewModel()
-        {
-            GetDataCommand = DelegateCommand.FromAsyncHandler(async () => await GetDataAsync());
-        }
+        public MainPageViewModel() => GetDataCommand = new DelegateCommand(async () => await GetDataAsync());
 
         public ICommand GetDataCommand { get; set; }
 
@@ -23,7 +20,7 @@ namespace App3.ViewModels
 
         private async Task GetDataAsync()
         {
-			var foo = await App.Remora_azureClient.GetTable<Hero>().ToListAsync();
+            var foo = await App.Remora_azureClient.GetTable<Hero>().ToListAsync();
 
             var client = new HttpClient();
             var data = await client.GetAsync(new Uri("http://localhost:5000/api/heroes"));
