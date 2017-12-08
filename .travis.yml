@@ -2,4 +2,5 @@ language: csharp
 solution: CoreWebApplication.sln
 dotnet: 2.0.0
 script:
- - dotnet restore
+ - dotnet restore .\src\CoreWebApplication\
+ - dotnet restore .\src\HeroicQuest.App\
