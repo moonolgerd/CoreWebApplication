@@ -10,22 +10,13 @@ namespace CoreWebApplication.Controllers
     {
         private readonly IVillainRepository _villains;
 
-        public VillainsController(IVillainRepository villains)
-        {
-            _villains = villains;
-        }
-               
+        public VillainsController(IVillainRepository villains) => _villains = villains ?? throw new System.ArgumentNullException(nameof(villains));
+
         [HttpGet]
-        public IEnumerable<Villain> Get()
-        {
-            return _villains.GetAll();
-        }
+        public IEnumerable<Villain> Get() => _villains.GetAll();
 
         [HttpGet("{id}")]
-        public Villain Get(int id)
-        {
-            return _villains.Find(id);
-        }
+        public Villain Get(int id) => _villains.Find(id);
 
         [HttpPost]
         public void Post([FromBody]Villain villain)
@@ -37,7 +28,7 @@ namespace CoreWebApplication.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Villain villain)
         {
-            var existing = _villains.Find(villain.Id);
+            var existing = _villains.Find(id);
             if (existing != null)
             {
                 existing.Name = villain.Name;

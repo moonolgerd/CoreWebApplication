@@ -12,7 +12,7 @@ namespace CoreWebApplication.Data
 
             if (!context.Heroes.Any())
             {
-                var heroes = new Hero[]
+                var heroes = new[]
                 {
                     new Hero{Name="Carson",Age=10},
                     new Hero{Name="Meredith",Age=88},
@@ -34,7 +34,7 @@ namespace CoreWebApplication.Data
 
             if (!context.Villains.Any())
             {
-                var villains = new Villain[]
+                var villains = new[]
                 {
                     new Villain{Name="Diablo",Level=10},
                     new Villain{Name="Lucifer",Level=88},
