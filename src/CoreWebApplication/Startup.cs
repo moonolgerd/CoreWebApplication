@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApplication.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoreWebApplication
 {
@@ -33,7 +34,7 @@ namespace CoreWebApplication
             var connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Oleg\HeroicQuest.mdf;Integrated Security=True;Connect Timeout=30";
 
             services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection), ServiceLifetime.Transient);
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSingleton<IHeroRepository, HeroRepository>();
             services.AddSingleton<IVillainRepository, VillainRepository>();
         }
@@ -46,6 +47,7 @@ namespace CoreWebApplication
             loggerFactory.AddDebug();
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             app.UseMvc();
+            app.UseHttpsRedirection();
             DbInitializer.Initialize(context);
         }
     }

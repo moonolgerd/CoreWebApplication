@@ -5,8 +5,9 @@ using Heroic.Shared;
 
 namespace CoreWebApplication.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class HeroesController : Controller
+    public class HeroesController : ControllerBase
     {
         private readonly IHeroRepository _heroes;
 
