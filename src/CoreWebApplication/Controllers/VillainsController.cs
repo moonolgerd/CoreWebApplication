@@ -27,7 +27,7 @@ namespace CoreWebApplication.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Villain villain)
+        public IActionResult Put(int id, [FromBody]Villain villain)
         {
             var existing = _villains.Find(id);
             if (existing != null)
@@ -36,7 +36,9 @@ namespace CoreWebApplication.Controllers
                 existing.Level = villain.Level;
                 existing.Role = villain.Role;
                 _villains.Update(existing);
+                return Ok();
             }
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
