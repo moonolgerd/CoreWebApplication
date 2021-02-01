@@ -7,48 +7,55 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using CoreWebApplication.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace CoreWebApplication
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
-            //var connection = @"Data Source=remora-server.database.windows.net;Initial Catalog=HeroicQuest;Integrated Security=False;User ID=omerkulov;Password=Remora2017;Connect Timeout=15;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            var connection = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Oleg\HeroicQuest.mdf;Integrated Security=True;Connect Timeout=30";
+            //services.AddApplicationInsightsTelemetry(Configuration);
+            
+            services.AddDbContext<HeroicContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("HeroicContext")));
 
-            services.AddDbContext<HeroicContext>(options => options.UseSqlServer(connection), ServiceLifetime.Transient);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IHeroRepository, HeroRepository>();
-            services.AddSingleton<IVillainRepository, VillainRepository>();
+            services.AddScoped<IHeroRepository, HeroRepository>();
+            services.AddScoped<IVillainRepository, VillainRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
-            HeroicContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseRouting();
+
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
-            app.UseMvc();
             app.UseHttpsRedirection();
-            DbInitializer.Initialize(context);
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
