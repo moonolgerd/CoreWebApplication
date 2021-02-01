@@ -1,14 +1,15 @@
 ﻿using Heroic.Shared;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoreWebApplication.Models
 {
     public interface IVillainRepository
     {
-        void Add(Villain item);
+        Task Add(Villain item);
         Villain Find(int id);
         IEnumerable<Villain> GetAll();
-        void Remove(int id);
-        void Update(Villain item);
+        Task Remove(int id);
+        Task Update(Villain item);
     }
 }

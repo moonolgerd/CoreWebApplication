@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoreWebApplication.Models
 {
@@ -11,27 +12,27 @@ namespace CoreWebApplication.Models
 
         public VillainRepository(HeroicContext context) => _context = context;
 
-        public void Add(Villain item)
+        public async Task Add(Villain item)
         {
-            _context.Add(item);
-            _context.SaveChanges();
+            await _context.AddAsync(item);
+            await _context.SaveChangesAsync();
         }
 
         public Villain Find(int id) => _context.Villains.FirstOrDefault(p => p.Id == id);
 
         public IEnumerable<Villain> GetAll() => _context.Villains.ToList();
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
             var entity = _context.Villains.First(t => t.Id == id);
             _context.Villains.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Villain item)
+        public async Task Update(Villain item)
         {
             _context.Villains.Update(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

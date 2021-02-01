@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CoreWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Heroic.Shared;
+using System.Threading.Tasks;
 
 namespace CoreWebApplication.Controllers
 {
@@ -20,14 +21,22 @@ namespace CoreWebApplication.Controllers
         public Villain Get(int id) => _villains.Find(id);
 
         [HttpPost]
-        public void Post([FromBody]Villain villain)
+        public async Task<IActionResult> Post([FromBody]Villain villain)
         {
-            if (_villains.Find(villain.Id) == null)
-                _villains.Add(villain);
+            if (ModelState.IsValid)
+            {
+                if (_villains.Find(villain.Id) == null)
+                    await _villains.Add(villain);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Villain villain)
+        public async Task<IActionResult> Put(int id, [FromBody]Villain villain)
         {
             var existing = _villains.Find(id);
             if (existing != null)
@@ -35,17 +44,22 @@ namespace CoreWebApplication.Controllers
                 existing.Name = villain.Name;
                 existing.Level = villain.Level;
                 existing.Role = villain.Role;
-                _villains.Update(existing);
+                await _villains.Update(existing);
                 return Ok();
             }
-            return NoContent();
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (_villains.Find(id) != null)
-                _villains.Remove(id);
+            {
+                await _villains.Remove(id);
+                return Ok();
+            }
+            else
+                return BadRequest();
         }
     }
 }
